@@ -1,0 +1,34 @@
+#importando pandas
+import pandas as pd
+
+# lendo csv
+df = pd.read_csv("/content/drive/MyDrive/Cusro_Python_Pandas_Digital_Innovation-master/datasets/Gapminder.csv",error_bad_lines=False,sep=";")
+
+#visualizando as 5 primeiras linhas
+df.head()
+
+#renomeando colunas
+df = df.rename(columns={"country":"pais","continent":"continente","year":"ano","lifeExp":"Expectativa de Vida","pop":"Populacao Total","gdpPercap":"PIB"})
+
+#total de linhas e colunas
+df.shape
+
+#nomes das colunas
+df.columns
+
+#pegar valores únicos
+df["continente"].unique()
+
+#coloca o filtro de continente Oceania com o nome de variável oceania e traz 5 primeiras linhas
+oceania = df.loc[df["continente"] == "Oceania"]
+oceania.head()
+
+#confere quais os continentes unicos em oceania
+oceania["continente"].unique()
+
+#Cria visão agrupando por continente e trazendo qtd de países únicos
+df.groupby("continente")["pais"].nunique()
+
+#media de expectativa de vida por ano
+df.groupby("ano")["Expectativa de Vida"].mean()
+
