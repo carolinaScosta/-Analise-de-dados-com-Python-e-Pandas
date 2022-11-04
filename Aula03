@@ -1,0 +1,22 @@
+#mudar tipo de dado
+df["Data"] = df["Data"].astype("int64")
+df.dtypes
+df["Data"] = pd.to_datetime(df["Data"])
+
+#agrupar data por ano e somar receita
+df.groupby(df["Data"].dt.year)["Receita"].sum()
+
+#criando uma nova coluna com o ano
+df["Ano Venda"] = df["Data"].dt.year
+
+#Criando coluna com mês e dia
+df["Mês Venda"], df["Dia Venda"] = (df["Data"].dt.month, df["Data"].dt.day)
+
+#diminuir uma data por outra
+df["diferença dias"] = df["Data"] - df["Data"].min()
+
+#trimestre da data
+df["Data"].dt.quarter
+
+#filtro com dois critérios
+vendas_out_2018 = df.loc[(df["Data"].dt.year == "2018") & (df["Data"].dt.month == "10")]
